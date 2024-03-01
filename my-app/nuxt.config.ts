@@ -1,5 +1,6 @@
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { defineNuxtConfig } from 'nuxt/config';
+import * as path from 'node:path';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -13,9 +14,18 @@ export default defineNuxtConfig({
   },
   typescript: {
     typeCheck: true,
+
     tsConfig: {
-      extends: './tsconfig.app.json',
+      compilerOptions: {
+        noEmit: false,
+        baseUrl: '.',
+      },
+      extends: path.join(__dirname, '..', 'tsconfig.base.json'),
     },
+  },
+
+  alias: {
+    '@nuxt-types/services': path.resolve(__dirname, '../libs/services/src'),
   },
 
   css: ['~/assets/css/styles.css'],

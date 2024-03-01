@@ -1,13 +1,18 @@
 <script setup lang="ts">
+import { test, testMe } from '@nuxt-types/services';
+
 defineProps<{
   title: string;
 }>();
 
 const result = useTest('test', 1);
+
+const testResult = testMe('test');
 </script>
 
 <template>
   <div class="wrapper">
+    <test name="hello" />
     <div class="container">
       <div id="welcome">
         <h1>
